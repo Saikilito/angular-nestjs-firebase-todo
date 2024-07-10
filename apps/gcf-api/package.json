@@ -1,0 +1,8 @@
+{
+  "name": "gcf-api",
+  "version": "0.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  }
+}

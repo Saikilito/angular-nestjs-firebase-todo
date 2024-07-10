@@ -1,0 +1,57 @@
+{
+  "name": "gcf-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/gcf-api/src",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/gcf-api/**/*.ts"],
+        "fix": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["coverage/apps/gcf-api"],
+      "options": {
+        "jestConfig": "apps/gcf-api/jest.config.ts",
+        "passWithNoTests": true,
+        "coverageDirectory": "coverage/apps/gcf-api"
+      }
+    },
+    "build": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "apps/gcf-api/src/index.ts",
+        "outputPath": "dist/apps/gcf-api",
+        "outputFileName": "index.js",
+        "project": "apps/gcf-api/package.json",
+        "tsConfig": "apps/gcf-api/tsconfig.json",
+        "assets": [],
+        "platform": "node",
+        "dependenciesFieldType": "dependencies",
+        "thirdParty": false,
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "minify": false
+        },
+        "production": {
+          "minify": true
+        }
+      }
+    },
+    "serve": {
+      "command": "firebase emulators:start --only functions"
+    },
+    "deploy": {
+      "command": "firebase deploy --only functions"
+    }
+  },
+  "tags": []
+}
