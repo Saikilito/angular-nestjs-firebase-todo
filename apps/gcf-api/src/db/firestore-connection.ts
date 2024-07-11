@@ -1,7 +1,7 @@
 import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
-export const firestoreConnection = () => {
+const firestoreConnection = () => {
   try {
     initializeApp({
       credential: applicationDefault(),
@@ -14,3 +14,5 @@ export const firestoreConnection = () => {
     console.error(error);
   }
 };
+
+export const { db } = firestoreConnection();

@@ -1,5 +1,2 @@
-import { IBase } from '../../shared';
-
-export interface User extends IBase {
-  email: string;
-}
+export * from './user';
+export * from './repository';

@@ -47,7 +47,7 @@
       }
     },
     "serve": {
-      "command": "firebase emulators:start --only functions"
+      "command": "npx nx build gcf-api && npx firebase emulators:start"
     },
     "deploy": {
       "command": "firebase deploy --only functions"

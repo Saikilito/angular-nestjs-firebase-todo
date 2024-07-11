@@ -1,6 +1,6 @@
-import express, { Application, Router } from 'express';
-import helmet from 'helmet';
 import cors from 'cors';
+import helmet from 'helmet';
+import express, { Application, Router } from 'express';
 
 export const makeExpressApp = (routes: Router): Application => {
   const app = express();

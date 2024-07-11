@@ -1,3 +1,2 @@
-export * from './base';
-export * from './basic-types';
-export * from './infrastructure';
+export * as Domain from './domain';
+export * as Infra from './infrastructure';

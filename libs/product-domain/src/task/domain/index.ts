@@ -1,7 +1,2 @@
-import { IBase } from '../shared';
-
-export interface Task extends IBase {
-  title: string;
-  description: string;
-  checked: boolean;
-}
+export * from './task';
+export * from './repository';

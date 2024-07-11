@@ -1,5 +1,10 @@
 {
   "compilerOptions": {},
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*",
+    "../../libs/product-domain/src/user/infrastructure/user-firestore.repository.ts",
+    "../../libs/product-domain/src/shared/infrastructure/firestore-base.repository.ts",
+    "../../libs/product-domain/src/task/infrastructure/task-firestore.repository.ts"
+  ],
   "extends": "../../tsconfig.base.json"
 }
