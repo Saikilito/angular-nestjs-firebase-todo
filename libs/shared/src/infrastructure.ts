@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 import { Literal } from './basic-types';
 
 export type WhereField = {
@@ -11,3 +13,19 @@ export type GetAllInput = {
     fields?: Array<WhereField>;
   };
 };
+
+export const ValidateGetAllInputSchema = z
+  .object({
+    sort: z.enum(['ASC', 'DESC']).nullable(),
+    where: z
+      .object({
+        fields: z.array(
+          z.object({
+            field: z.string(),
+            value: z.any(),
+          })
+        ),
+      })
+      .nullable(),
+  })
+  .partial();

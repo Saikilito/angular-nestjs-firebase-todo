@@ -18,16 +18,6 @@ export const UserFirestoreRepository = (
   return {
     ...baseRepository,
 
-    create: async (input) => {
-      const doc = await firestore.add({
-        ...input,
-        createdAt: new Date().toISOString(),
-        deletedAt: null,
-      });
-
-      return ((await doc.get()).data() as User) ?? null;
-    },
-
     getByEmail: async ({ email }) => {
       const snapshot = await firestore.where('email', '==', email).get();
 
@@ -36,7 +26,10 @@ export const UserFirestoreRepository = (
       }
 
       const [doc] = snapshot.docs;
-      return doc.data() as User;
+      return {
+        id: doc.id,
+        ...doc.data(),
+      } as User;
     },
   };
 };

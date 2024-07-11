@@ -1,15 +1,28 @@
 import { Router } from 'express';
 
 import { TaskController } from '../../controllers';
+import { TaskValidation } from '../../dependency-injection';
 
 const taskRouter = Router();
 
-taskRouter.get('/', TaskController.getAll);
+taskRouter.get('/', TaskValidation.validateGetAllQuery, TaskController.getAll);
 
-taskRouter.post('/', TaskController.create);
+taskRouter.post(
+  '/',
+  TaskValidation.validateCreateTaskInput,
+  TaskController.create
+);
 
-taskRouter.patch('/:id', TaskController.updateById);
+taskRouter.patch(
+  '/:id',
+  TaskValidation.validateTaskPartialInput,
+  TaskController.updateById
+);
 
-taskRouter.delete('/:id', TaskController.deleteById);
+taskRouter.delete(
+  '/:id',
+  TaskValidation.validateIdParams,
+  TaskController.deleteById
+);
 
 export default taskRouter;

@@ -1,10 +1,22 @@
-### Retrieve User By Email
-GET {{baseUrl}}/v1/users/kembert@gmail.com
+### Retrieve Tasks
+GET {{baseUrl}}/v1/tasks
 
-### Create User
-POST {{baseUrl}}/v1/users
+### Create Tasks
+POST {{baseUrl}}/v1/tasks
 Content-Type: application/json
 
 {
-    "email":"kembert@gmail.com"
+    "title":"New Task",
+    "description": "Close backend"
 }
+
+### Update Task
+PATCH {{baseUrl}}/v1/tasks/0EYaCRAVwkJNnz3kcfTs
+Content-Type: application/json
+
+{
+    "title": "Updated Title Task"
+}
+
+### Delete Task
+DELETE {{baseUrl}}/v1/tasks/0EYaCRAVwkJNnz3kcfTs

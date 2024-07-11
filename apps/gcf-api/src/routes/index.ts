@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import pingRoutes from './ping';
 import userRoutes from './user';
 import taskRoutes from './task';

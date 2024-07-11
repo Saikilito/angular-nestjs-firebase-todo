@@ -13,7 +13,23 @@ export const TaskFirebaseRepository = (
     repository: db,
   });
 
+  const firestore = db.collection(collection);
+
   return {
     ...baseRepository,
+
+    create: async (input) => {
+      const doc = await firestore.add({
+        ...input,
+        checked: false,
+        createdAt: new Date().toISOString(),
+        deletedAt: null,
+      });
+
+      return {
+        id: doc.id,
+        ...(await doc.get()).data(),
+      } as Task;
+    },
   };
 };

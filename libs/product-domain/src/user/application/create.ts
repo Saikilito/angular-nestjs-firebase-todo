@@ -1,3 +1,4 @@
+import { Errors } from '@shared';
 import { UserRepository, UserCreateInput } from '../domain';
 
 export const makeCreateUser =
@@ -6,8 +7,10 @@ export const makeCreateUser =
     const userExist = await userRepository.getByEmail({ email });
 
     if (userExist) {
-      // TODO: Change for 404 error
-      throw new Error(`The user ${email} already exist`);
+      throw Errors.AlreadyExistError.create(
+        `The user ${email} already exist`,
+        'CREATE_USER_REPOSITORY'
+      );
     }
 
     return userRepository.create({ email });

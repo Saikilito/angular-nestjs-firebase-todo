@@ -1,10 +1,10 @@
 ### Retrieve User By Email
-GET {{baseUrl}}/v1/users/kembert@gmail.com
+GET {{baseUrl}}/v1/users/kem@mail.com
 
 ### Create User
 POST {{baseUrl}}/v1/users
 Content-Type: application/json
 
 {
-    "email":"kembert@mail.com"
+    "email":"kem@mail.com"
 }

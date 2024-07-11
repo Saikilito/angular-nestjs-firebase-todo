@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-export const validateEmailSchema = z.object({
+export const ValidateEmailSchema = z.object({
   email: z.string().email(),
 });
 
-export const validateUserSchema = z.object({
+export const ValidateUserSchema = z.object({
   email: z.string().email(),
 });

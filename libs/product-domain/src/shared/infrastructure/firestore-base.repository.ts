@@ -43,11 +43,14 @@ export const makeFirestoreRepository = <T>({
     async create(input) {
       const doc = await firestore.add({
         ...input,
-        createdAt: new Date(),
+        createdAt: new Date().toISOString(),
         deletedAt: null,
       });
 
-      return (await doc.get()) as T;
+      return {
+        id: doc.id,
+        ...(await doc.get()).data(),
+      } as T;
     },
     updateById: async (id: string, partial: Partial<T>) => {
       try {
