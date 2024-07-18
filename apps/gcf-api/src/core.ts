@@ -1,7 +1,7 @@
 import cors from 'cors';
 import helmet from 'helmet';
 import express, { Application, Router } from 'express';
-import { handleErrorTypeMiddleware } from './middleware';
+import { handleErrorTypeMiddleware } from './middlewares';
 
 export const makeExpressApp = (routes: Router): Application => {
   const app = express();

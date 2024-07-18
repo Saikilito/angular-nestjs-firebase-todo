@@ -21,6 +21,7 @@
       "@product-domain": ["libs/product-domain/src/index.ts"],
       "@product-domain/task": ["libs/product-domain/src/task/index.ts"],
       "@product-domain/user": ["libs/product-domain/src/user/index.ts"],
+      "@product-domain/auth": ["libs/product-domain/src/auth/index.ts"],
       "@product-domain/shared": ["libs/product-domain/src/shared/index.ts"]
     }
   },

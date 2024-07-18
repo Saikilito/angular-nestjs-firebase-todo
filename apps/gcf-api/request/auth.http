@@ -1,0 +1,15 @@
+### Register User
+POST {{baseUrl}}/v1/auth/register
+Content-Type: application/json
+
+{
+    "email":"kem@mail.com"
+}
+
+### Auth User
+POST {{baseUrl}}/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"kem@mail.com"
+}

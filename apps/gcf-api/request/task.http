@@ -1,9 +1,11 @@
 ### Retrieve Tasks
 GET {{baseUrl}}/v1/tasks
+Authorization: bearer {{apiKey}}
 
 ### Create Tasks
 POST {{baseUrl}}/v1/tasks
 Content-Type: application/json
+Authorization: bearer {{apiKey}}
 
 {
     "title":"New Task",
@@ -11,12 +13,14 @@ Content-Type: application/json
 }
 
 ### Update Task
-PATCH {{baseUrl}}/v1/tasks/0EYaCRAVwkJNnz3kcfTs
+PATCH {{baseUrl}}/v1/tasks/yoN1RJePa21DCWSiOxom
 Content-Type: application/json
+Authorization: bearer {{apiKey}}
 
 {
     "title": "Updated Title Task"
 }
 
 ### Delete Task
-DELETE {{baseUrl}}/v1/tasks/0EYaCRAVwkJNnz3kcfTs
+DELETE {{baseUrl}}/v1/tasks/yoN1RJePa21DCWSiOxom
+Authorization: bearer {{apiKey}}

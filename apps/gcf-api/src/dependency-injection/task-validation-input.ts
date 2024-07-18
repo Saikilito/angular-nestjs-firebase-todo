@@ -1,7 +1,7 @@
 import { ValidateGetAllInputSchema } from '@shared';
 import { Infra as TaskInfra } from '@product-domain/task';
 import { Infra as SharedInfra } from '@product-domain/shared';
-import { validateInputMiddleware } from '../middleware';
+import { validateInputMiddleware } from '../middlewares';
 
 const { ValidateIdSchema } = SharedInfra;
 const { ValidateTaskSchema, ValidateTaskPartialSchema } = TaskInfra;

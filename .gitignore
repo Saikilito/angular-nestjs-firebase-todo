@@ -51,3 +51,6 @@ firebase.json
 firebase-account.json
 firestore.indexes.json
 firestore.rules
+.runtimeconfig.json
+.env
+.env.*

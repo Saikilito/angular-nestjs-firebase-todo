@@ -1,15 +1,14 @@
-import { Infra } from '@product-domain/user';
-import { validateInputMiddleware } from '../middleware';
+import { Infra as SharedInfra } from '@product-domain/shared';
+import { Infra as UserInfra } from '@product-domain/user';
+import { validateInputMiddleware } from '../middlewares';
 
-const {
-  ValidateEmailSchema: validateEmailSchema,
-  ValidateUserSchema: validateUserSchema,
-} = Infra;
+const { ValidateEmailSchema } = SharedInfra;
+const { ValidateUserSchema } = UserInfra;
 
 export const validateGetByEmailParams = validateInputMiddleware({
-  paramsSchema: validateEmailSchema,
+  paramsSchema: ValidateEmailSchema,
 });
 
 export const validateCreateUserInput = validateInputMiddleware({
-  bodySchema: validateUserSchema,
+  bodySchema: ValidateUserSchema,
 });

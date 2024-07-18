@@ -1,5 +1,6 @@
 import { ZodType } from 'zod';
 import { NextFunction, Request, Response } from 'express';
+import { ExpressHandlerMiddleware } from './express-middleware.type';
 
 type ValidationInput = {
   bodySchema?: ZodType | null;
@@ -7,8 +8,12 @@ type ValidationInput = {
   paramsSchema?: ZodType | null;
 };
 
-export const validateInputMiddleware =
-  ({ bodySchema, paramsSchema, querySchema }: ValidationInput) =>
+type ValidateInputMiddleware = (
+  input: ValidationInput
+) => ExpressHandlerMiddleware;
+
+export const validateInputMiddleware: ValidateInputMiddleware =
+  ({ bodySchema, paramsSchema, querySchema }) =>
   (req: Request, _: Response, next: NextFunction) => {
     const errors = [];
 
@@ -30,7 +35,6 @@ export const validateInputMiddleware =
         errors.push(queryResponse.error);
       }
     }
-
     if (errors.length) {
       throw errors;
     }
