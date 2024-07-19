@@ -8,7 +8,8 @@
       <app-input-text-form
         [placeholder]="'Email'"
         [buttonText]="'Login'"
-        (inputTextFormClick)="onHandleLogin($event)"
+        [inputText]="inputLogin"
+        (inputTextFormClick)="onHandleLogin()"
       />
     </div>
   </div>

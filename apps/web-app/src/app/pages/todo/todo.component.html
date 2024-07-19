@@ -1,4 +1,4 @@
-<div class="container-app">
+<div class="container-app center">
   <div class="todo-app">
     <h2>To-Do List <i class="fa-regular fa-rectangle-list"></i></h2>
 
@@ -7,12 +7,16 @@
     <ul id="list-container">
       <li *ngFor="let task of tasks">
         <app-task
-          (taskToEditEvent)="onHandleTaskEdit(task)"
-          (taskToDeleteEvent)="deleteTask($event)"
           [task]="task"
+          (taskToDeleteEvent)="deleteTask($event)"
+          (taskToEditEvent)="onHandleTaskEdit(task)"
         />
       </li>
     </ul>
+
+    <button (click)="onHandleLogout()" class="logout btn button-orange">
+      <i class="fa-solid fa-plug-circle-minus"></i>
+    </button>
   </div>
 </div>
 <app-edit-modal

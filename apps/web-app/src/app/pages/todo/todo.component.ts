@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 import { Domain } from '@product-domain/task';
 
@@ -27,7 +27,10 @@ export class AppToDoComponent implements OnInit {
   taskToEdit = {} as Task;
   tasks: Task[] = [];
 
-  constructor(private readonly taskService: TaskService) {}
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     const setTasks = (tasks: Task[]) => {
@@ -53,6 +56,10 @@ export class AppToDoComponent implements OnInit {
   onHandleEndTaskEdit(val: boolean) {
     console.info({ val });
     this.taskEditMode = val;
+  }
+
+  onHandleLogout() {
+    this.router.navigate(['/']);
   }
 
   submitEditTask(task: Task) {
