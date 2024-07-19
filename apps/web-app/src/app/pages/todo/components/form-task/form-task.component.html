@@ -1,0 +1,15 @@
+<div>
+  <app-input-text-form
+    [inputText]="formTaskTitle"
+    [buttonText]="buttonText"
+    (inputTextFormClick)="onHandleInputText($event)"
+  />
+
+  <div class="input-row">
+    <textarea
+      placeholder="Add Task description"
+      [formControl]="formTaskDescription"
+      [value]="descriptionValue"
+    ></textarea>
+  </div>
+</div>

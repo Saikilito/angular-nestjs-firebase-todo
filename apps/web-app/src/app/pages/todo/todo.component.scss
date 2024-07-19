@@ -1,0 +1,30 @@
+.todo-app {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--white-color);
+  margin: 100px auto 20px;
+  padding: 40px 30px 70px;
+  border-radius: 10px;
+
+  h2 {
+    width: 100%;
+    color: var(--blue-color);
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+
+  i {
+    width: 30px;
+    margin-left: 10px;
+  }
+}
+
+ul li {
+  list-style: none;
+  font-size: 17px;
+  padding: 12px 8px 12px 20px;
+  user-select: none;
+  position: relative;
+}

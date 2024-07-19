@@ -22,7 +22,10 @@
             "input": "apps/web-app/public"
           }
         ],
-        "styles": ["apps/web-app/src/styles.scss"],
+        "styles": [
+          "apps/web-app/src/styles.scss",
+          "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+        ],
         "scripts": []
       },
       "configurations": {

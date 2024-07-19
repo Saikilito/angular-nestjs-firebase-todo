@@ -1,0 +1,22 @@
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+
+  background-color: var(--white-color);
+  padding: 50px;
+
+  & > div > h2 {
+    text-align: center;
+    color: var(--blue-color);
+    margin-bottom: 3rem;
+  }
+}
+
+small {
+  position: relative;
+  bottom: 10px;
+  color: var(--orange-dark-color);
+}

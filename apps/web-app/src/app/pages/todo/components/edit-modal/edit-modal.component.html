@@ -1,0 +1,8 @@
+<app-modal-base [show]="show" (closeModalEvent)="closeModal()">
+  <app-form-task
+    [buttonText]="'Edit'"
+    [titleValue]="taskToEdit.title"
+    [descriptionValue]="taskToEdit.description"
+    (taskToCreteRetrieved)="getTaskToEdited($event)"
+  />
+</app-modal-base>

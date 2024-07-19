@@ -1,0 +1,9 @@
+<div *ngIf="show" [class]="'modal-container'">
+  <div class="container">
+    <h2>{{ modalTitle }} <i class="fa-regular fa-rectangle-list"></i></h2>
+    <span (click)="onHandleCloseModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container-app">
+  <div class="todo-app">
+    <h2>To-Do List <i class="fa-regular fa-rectangle-list"></i></h2>
+
+    <app-form-task (taskToCreteRetrieved)="addTask($event)" />
+
+    <ul id="list-container">
+      <li *ngFor="let task of tasks">
+        <app-task
+          (taskToEditEvent)="onHandleTaskEdit(task)"
+          (taskToDeleteEvent)="deleteTask($event)"
+          [task]="task"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+<app-edit-modal
+  [show]="taskEditMode"
+  [taskToEdit]="taskToEdit"
+  (closeModalEvent)="onHandleEndTaskEdit($event)"
+  (submitEditTaskEvent)="submitEditTask($event)"
+/>

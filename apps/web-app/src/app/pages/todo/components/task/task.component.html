@@ -1,0 +1,23 @@
+<div class="task-container">
+  @if(task.checked){
+  <div (click)="onToggleChecked(false)">
+    <i class="fa-solid fa-circle-check"></i>
+  </div>
+  }@else {
+  <div (click)="onToggleChecked(true)">
+    <i class="fa-solid fa-circle-notch"></i>
+  </div>
+  }
+  <div [class]="task.checked ? 'checked' : ''">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+  </div>
+  <div class="actions-container">
+    <div (click)="onHandleEdit(task)">
+      <i class="fa-regular fa-pen-to-square"></i>
+    </div>
+    <div (click)="onHandleDelete(task.id)">
+      <i class="fa-regular fa-circle-xmark"></i>
+    </div>
+  </div>
+</div>

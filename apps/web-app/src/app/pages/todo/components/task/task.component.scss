@@ -1,0 +1,62 @@
+.task-container {
+  display: flex;
+  margin: 0;
+
+  & > div > i {
+    font-size: 36px;
+    position: relative;
+    right: 20px;
+    cursor: pointer;
+    animation: 1s ease-in-out;
+  }
+
+  & > div > i:hover {
+    transform: scale(1.1);
+  }
+
+  & > div > i.fa-circle-notch {
+    color: var(--blue-color);
+  }
+
+  & > div > i.fa-circle-check {
+    color: var(--orange-color);
+  }
+
+  & > div > h3,
+  i {
+    color: var(--blue-color);
+  }
+
+  .checked {
+    & > h3,
+    p {
+      color: var(--red-color);
+      text-decoration: line-through;
+    }
+  }
+
+  .actions-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+
+    & > div {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      text-align: center;
+    }
+
+    & > div > i {
+      font-size: 25px;
+      animation: 1s;
+    }
+
+    & > div > i:hover {
+      color: var(--red-color);
+      transform: scale(1.1);
+    }
+  }
+}

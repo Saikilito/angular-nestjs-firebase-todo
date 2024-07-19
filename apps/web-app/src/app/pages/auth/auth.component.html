@@ -1,0 +1,17 @@
+<div class="container-app d-flex justify-center align-center h-100">
+  <div class="auth-container">
+    <div>
+      <h2>ToDo App List</h2>
+      <small>Enter your email to start the experience</small>
+    </div>
+    <div>
+      <app-input-text-form
+        [placeholder]="'Email'"
+        [buttonText]="'Login'"
+        (inputTextFormClick)="onHandleLogin($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<app-confirm-register-modal [show]="show" (closeModalEvent)="closeModal()" />

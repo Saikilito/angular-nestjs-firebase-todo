@@ -1,0 +1,10 @@
+<app-modal-base
+  [show]="show"
+  [modalTitle]="modalTitle"
+  (closeModalEvent)="closeModal()"
+>
+  <p>Your account was created</p>
+  <div class="button-container">
+    <button (click)="closeModal()" class="btn button-orange">Confirm</button>
+  </div>
+</app-modal-base>
