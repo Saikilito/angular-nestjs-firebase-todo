@@ -1,41 +1,35 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Domain } from '@product-domain/task';
+import { envConfig } from '../../config';
 
+type Task = Domain.Task;
+// TODO: unificar las respuestas con lo que devuelve el backend
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  constructor() {
-    console.info('::: Init Task Service :::');
+  private uri = `${envConfig.SERVER_URL}/tasks`;
+
+  constructor(private readonly httpService: HttpClient) {}
+
+  getAllTask() {
+    return this.httpService.get<{ tasks: Task[] }>(this.uri);
   }
 
-  async getAllTask(): Promise<Domain.Task[]> {
-    return [
-      {
-        id: '1',
-        title: 'Task 1',
-        description: 'Description task 1',
-        checked: true,
-        createdAt: new Date(),
-        deletedAt: null,
-      },
-      {
-        id: '2',
-        title: 'Task 2',
-        description: 'Description task 2',
-        checked: false,
-        createdAt: new Date(),
-        deletedAt: null,
-      },
-      {
-        id: '3',
-        title: 'Task 3',
-        description: 'Description task 3',
-        checked: false,
-        createdAt: new Date(),
-        deletedAt: null,
-      },
-    ];
+  createTask(task: Domain.TaskCreateInput) {
+    return this.httpService.post<{ task: Task }>(this.uri, task);
+  }
+
+  updateTask(id: string, partial: Domain.TaskUpdateInput) {
+    return this.httpService.patch<{ success: boolean }>(
+      `${this.uri}/${id}`,
+      partial
+    );
+  }
+
+  deleteTask(id: string) {
+    return this.httpService.delete<{ success: boolean }>(`${this.uri}/${id}`);
   }
 }

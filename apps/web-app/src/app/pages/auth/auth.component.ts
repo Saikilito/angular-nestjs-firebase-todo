@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { Component, inject, Input } from '@angular/core';
 
-import { Domain } from '@product-domain/user';
-
+import { CONSTANTS } from '../../shared/constants';
 import { ConfirmRegisterModalComponent } from './components';
+import { AuthService } from '../../core/services/auth.service';
 import { InputTextFormComponent } from '../../shared/components';
 
 const Components = [ConfirmRegisterModalComponent, InputTextFormComponent];
 
-type User = Domain.User;
 @Component({
   standalone: true,
   imports: [RouterModule, CommonModule, ...Components],
@@ -19,42 +19,37 @@ type User = Domain.User;
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
-  constructor(private router: Router) {}
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
 
   @Input() inputLogin = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  show = false;
+  public show = false;
 
-  users: User[] = [
-    {
-      id: '1',
-      email: 'kem@gmail.com',
-      createdAt: new Date(),
-      deletedAt: null,
-    },
-  ];
-
-  onHandleLogin() {
-    if (!this.inputLogin.valid) {
-      console.info(this.inputLogin.errors);
+  async onHandleLogin() {
+    const isValidEmail = this.inputLogin.valid;
+    if (!isValidEmail) {
       return window.alert('Should set a valid email');
     }
 
-    const userExist = this.users.find(
-      (user) => user.email === this.inputLogin.value
-    );
-    if (userExist) {
-      return this.router.navigate(['/todo']);
+    const email = this.inputLogin.value as string;
+
+    const response = await firstValueFrom(this.authService.login(email));
+
+    if (response) {
+      return this.router.navigate([CONSTANTS.ROUTES.TODO_APP]);
     }
 
-    this.show = true;
+    firstValueFrom(this.authService.register(email))
+      .then(() => (this.show = true))
+      .catch(console.error);
   }
 
   closeModal() {
     this.show = false;
-    return this.router.navigate(['/todo']);
+    return this.router.navigate([CONSTANTS.ROUTES.TODO_APP]);
   }
 }
