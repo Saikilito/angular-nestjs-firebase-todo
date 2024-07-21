@@ -13,8 +13,8 @@ export const makeAuth =
     const userExist = await userRepository.getByEmail({ email });
 
     if (!userExist) {
-      throw Errors.ForbiddenError.create(
-        `You don't have permission for access`,
+      throw Errors.NotFoundResourceError.create(
+        `User ${email} don't exist`,
         'AUTH_USE_CASE'
       );
     }
