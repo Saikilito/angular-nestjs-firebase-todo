@@ -32,6 +32,18 @@
     color: var(--blue-color);
   }
 
+  @media (max-width: 385px) {
+    & > div > h3 {
+      font-size: 17px;
+    }
+    & > div > p {
+      font-size: 14px;
+    }
+    & > div > i {
+      font-size: 25px;
+    }
+  }
+
   .checked {
     & > h3,
     p {

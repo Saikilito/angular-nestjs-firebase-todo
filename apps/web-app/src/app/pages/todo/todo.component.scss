@@ -45,6 +45,20 @@ ul li {
   border-radius: 50%;
 
   position: absolute;
-  top: -5rem;
-  right: -5rem;
+  top: -4.5rem;
+  right: -4.5rem;
+
+  i {
+    position: relative;
+    right: 3px;
+  }
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
 }

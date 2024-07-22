@@ -53,7 +53,7 @@ El proyecto consiste en una aplicación de tareas (ToDo) sencilla que permite a 
 
 - ✅ Debe existir una opción para editar y eliminar una tarea.
 
-- La aplicación debe ser responsive y adaptarse a diferentes
+- ✅ La aplicación debe ser responsive y adaptarse a diferentes
   dispositivos.
 
 - ✅ Desarrollar un API con lo siguiente:

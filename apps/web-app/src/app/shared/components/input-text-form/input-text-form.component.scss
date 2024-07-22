@@ -1,0 +1,10 @@
+@media (max-width: 385px) {
+  .input-row > button {
+    max-width: 100px;
+
+    & > span {
+      position: relative;
+      left: -15px;
+    }
+  }
+}
