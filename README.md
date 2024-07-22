@@ -113,13 +113,12 @@ Para iniciar esta app en local, por favor siga cuidadosamente los siguientes pas
 3. Inicie la configuración de Firebase desde la terminal: `npx firebase init`
 4. Habilite la opción de Firebase para iniciar los emuladores, asegurándose de incluir al menos Firebase Functions y Firebase Firestore.
 5. Instale todas las dependencias del proyecto: `npm ci`
-6. Levante el backend con el comando: `npx nx serve gcf-api`
-7. Una vez iniciado correctamente el backend, la terminal le proporcionará la dirección URL donde corren los emuladores de Firebase. Esta tendrá una forma similar a `http://127.0.0.1:3001/<firebase-project-name>/us-central1/api`. Guarde esta dirección ya que será vital para correr el proyecto.
-8. Agregue variables de entorno:
-   - En `apps/gcf-api/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará.
-   - En `apps/web-app/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará. Tenga en cuenta que la URL del servidor puede cambiar dependiendo del nombre de su proyecto Firebase y la versión del emulador que esté utilizando. También asegúrese de agregar el sufijo `/v1` a la dirección del servidor, donde se encuentran trabajando todas las rutas del servidor.
-9. Levante el frontend con el comando: `npx nx serve web-app`
-10. Abra la app en [localhost:4200](http://localhost:4200) para ver la Angular ToDo App.
+6. En `apps/gcf-api/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará.
+7. Levante el backend con el comando: `npx nx serve gcf-api`
+8. Una vez iniciado correctamente el backend, la terminal le proporcionará la dirección URL donde corren los emuladores de Firebase. Esta tendrá una forma similar a `http://127.0.0.1:3001/<firebase-project-name>/us-central1/api`. Guarde esta dirección ya que será vital para correr el proyecto.
+9. En `apps/web-app/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará. Tenga en cuenta que la URL del servidor puede cambiar dependiendo del nombre de su proyecto Firebase y la versión del emulador que esté utilizando. También asegúrese de agregar el sufijo `/v1` a la dirección del servidor, donde se encuentran trabajando todas las rutas del servidor.
+10. Levante el frontend con el comando: `npx nx serve web-app`
+11. Abra la app en [localhost:4200](http://localhost:4200) para ver la Angular ToDo App.
 
 ### Descripción de las variables de entorno:
 
