@@ -1,4 +1,5 @@
 import { firstValueFrom } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -31,7 +32,8 @@ export class AppToDoComponent implements OnInit {
 
   constructor(
     private readonly taskService: TaskService,
-    private readonly router: Router
+    private readonly router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +43,11 @@ export class AppToDoComponent implements OnInit {
 
     firstValueFrom(this.taskService.getAllTask())
       .then(setTasks)
-      .catch(console.error);
+      .catch(this.showToastError);
+  }
+
+  showToastError(error: Error) {
+    this.toastr.error(error.message);
   }
 
   addTask(task: TaskCreateInput) {
@@ -49,7 +55,7 @@ export class AppToDoComponent implements OnInit {
       .then((response) => {
         return this.tasks.unshift(response.task);
       })
-      .catch(console.error);
+      .catch(this.showToastError);
   }
 
   editTask(task: Task) {
@@ -61,9 +67,22 @@ export class AppToDoComponent implements OnInit {
           .concat([task])
           .concat(this.tasks.slice(index + 1));
       })
-      .catch(console.error);
+      .catch(this.showToastError);
 
     this.taskEditMode = false;
+  }
+
+  toggleChecked({ id, checked }: { id: string; checked: boolean }) {
+    firstValueFrom(this.taskService.updateTask(id, { checked }))
+      .then(() => {
+        const index = this.tasks.findIndex((task) => task.id === id);
+        const taskToggle = { ...this.tasks[index], checked };
+        this.tasks = this.tasks
+          .slice(0, index)
+          .concat([taskToggle])
+          .concat(this.tasks.slice(index + 1));
+      })
+      .catch(this.showToastError);
   }
 
   deleteTask(id: string) {

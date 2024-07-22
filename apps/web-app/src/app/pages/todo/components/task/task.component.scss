@@ -2,6 +2,11 @@
   display: flex;
   margin: 0;
 
+  & > div > small {
+    font-size: 12px;
+    margin: 15px 0;
+  }
+
   & > div > i {
     font-size: 36px;
     position: relative;

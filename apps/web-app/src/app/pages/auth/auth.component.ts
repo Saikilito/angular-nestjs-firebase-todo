@@ -1,4 +1,5 @@
 import { firstValueFrom } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
@@ -21,6 +22,7 @@ const Components = [ConfirmRegisterModalComponent, InputTextFormComponent];
 export class AuthComponent {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+  private readonly toastr = inject(ToastrService);
 
   @Input() inputLogin = new FormControl('', [
     Validators.required,
@@ -32,7 +34,7 @@ export class AuthComponent {
   async onHandleLogin() {
     const isValidEmail = this.inputLogin.valid;
     if (!isValidEmail) {
-      return window.alert('Should set a valid email');
+      return this.toastr.error('Should set a valid email');
     }
 
     const email = this.inputLogin.value as string;
@@ -43,9 +45,9 @@ export class AuthComponent {
       return this.router.navigate([CONSTANTS.ROUTES.TODO_APP]);
     }
 
-    firstValueFrom(this.authService.register(email))
+    return firstValueFrom(this.authService.register(email))
       .then(() => (this.show = true))
-      .catch(console.error);
+      .catch((err) => this.toastr.error(err.message));
   }
 
   closeModal() {

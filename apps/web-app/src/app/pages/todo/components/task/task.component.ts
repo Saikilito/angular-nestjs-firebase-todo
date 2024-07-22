@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Domain } from '@product-domain/task';
 
 type Task = Domain.Task;
@@ -10,21 +17,26 @@ type Task = Domain.Task;
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
-export class TaskComponent {
-  @Input() task: Task = {
-    id: `${Math.random() * 100}`,
-    title: 'Task 1',
-    description: 'Description Test',
-    checked: true,
-    createdAt: new Date(),
-    deletedAt: null,
-  };
+export class TaskComponent implements OnChanges {
+  @Input() task = {} as Task;
 
   @Output() taskToEditEvent = new EventEmitter<Task>();
   @Output() taskToDeleteEvent = new EventEmitter<string>();
+  @Output() taskToCheckedEvent = new EventEmitter<{
+    id: string;
+    checked: boolean;
+  }>();
+
+  public createdAt = '';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['task']) {
+      this.createdAt = `${this.task.createdAt}`.split('T')[0];
+    }
+  }
 
   onToggleChecked(checked: boolean) {
-    this.task.checked = checked;
+    this.taskToCheckedEvent.emit({ id: this.task.id, checked });
   }
 
   onHandleEdit(task: Task) {

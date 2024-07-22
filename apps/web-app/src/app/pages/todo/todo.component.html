@@ -8,6 +8,7 @@
       <li *ngFor="let task of tasks">
         <app-task
           [task]="task"
+          (taskToCheckedEvent)="toggleChecked($event)"
           (taskToDeleteEvent)="deleteTask($event)"
           (taskToEditEvent)="onHandleTaskEdit(task)"
         />

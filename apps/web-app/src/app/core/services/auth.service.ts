@@ -1,14 +1,16 @@
 import { catchError, of, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { CONSTANTS } from '@shared';
+import { CONSTANTS, Errors } from '@shared';
 import { envConfig } from '../../config';
 import { CONSTANTS as ANGULAR_CONSTANTS } from '../../shared/constants';
 
 type TokenResponse = {
   token: string;
 };
+
+const { HTTP_STATUS_CODE } = CONSTANTS;
 
 @Injectable({
   providedIn: 'root',
@@ -25,14 +27,13 @@ export class AuthService {
       })
       .pipe(
         tap(this.setToken),
-        catchError((error) => {
-          // Only for test this application
-          // TODO: Review Error Response from backend
-          if (error.status === CONSTANTS.HTTP_STATUS_CODE.UNAUTHORIZED) {
+        catchError((err: HttpErrorResponse) => {
+          const error: Errors.ObjectError = err.error;
+          if (error && error.statusCode === HTTP_STATUS_CODE.NOT_FOUND) {
             return of(null);
           }
 
-          throw error;
+          throw err;
         })
       );
   }

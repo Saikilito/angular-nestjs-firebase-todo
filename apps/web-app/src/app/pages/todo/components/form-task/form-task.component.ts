@@ -6,6 +6,8 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { match, P } from 'ts-pattern';
+import { ToastrService } from 'ngx-toastr';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Domain } from '@product-domain/task';
@@ -34,35 +36,75 @@ export class FormTaskComponent implements OnChanges {
   @Input() descriptionValue = '';
   @Output() taskToCreteRetrieved = new EventEmitter<TaskCreateInput>();
 
+  constructor(private toastr: ToastrService) {}
+
+  titleMaxLength = 45;
+  descriptionMaxLength = 80;
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['titleValue']) {
       this.formTaskTitle = new FormControl(this.titleValue, {
         nonNullable: true,
-        validators: [Validators.required, Validators.maxLength(45)],
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.titleMaxLength),
+        ],
       });
     }
 
     if (changes['descriptionValue']) {
       this.formTaskDescription = new FormControl(this.descriptionValue, {
         nonNullable: true,
-        validators: [Validators.maxLength(45)],
+        validators: [Validators.maxLength(this.descriptionMaxLength)],
       });
     }
   }
 
   formTaskTitle = new FormControl(this.titleValue, {
     nonNullable: true,
-    validators: [Validators.required, Validators.maxLength(45)],
+    validators: [
+      Validators.required,
+      Validators.maxLength(this.titleMaxLength),
+    ],
   });
 
   formTaskDescription = new FormControl(this.descriptionValue, {
     nonNullable: true,
-    validators: [Validators.maxLength(45)],
+    validators: [Validators.maxLength(this.descriptionMaxLength)],
   });
 
   onHandleInputText(titleInput: TitleInput) {
-    if (!this.formTaskDescription.valid || !titleInput.valid) {
-      return console.error('Form not valid');
+    match(this.formTaskTitle)
+      .with({ valid: false, errors: P._ }, (formTaskTitle) =>
+        match(formTaskTitle.errors)
+          .with({ required: true }, () =>
+            this.toastr.error('Title is required')
+          )
+          .with({ maxlength: P.not(P.nullish) }, () =>
+            this.toastr.error(
+              `Title size too large, should be less or equal than ${this.titleMaxLength} characters`
+            )
+          )
+          .otherwise(() => this.toastr.error('An unexpected error occurred'))
+      )
+      .otherwise(() =>
+        match(this.formTaskDescription).with(
+          { valid: false, errors: P._ },
+          (formTaskDescription) =>
+            match(formTaskDescription.errors)
+              .with({ maxlength: P.not(P.nullish) }, () =>
+                this.toastr.error(
+                  `Description size too large, should be less or equal than ${this.descriptionMaxLength} characters`
+                )
+              )
+              .otherwise(() =>
+                this.toastr.error('An unexpected error occurred')
+              )
+        )
+      );
+
+    if (!this.formTaskTitle.valid || !this.formTaskDescription.valid) {
+      return;
     }
 
     this.taskToCreteRetrieved.emit({

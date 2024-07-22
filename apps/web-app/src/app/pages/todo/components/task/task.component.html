@@ -11,6 +11,7 @@
   <div [class]="task.checked ? 'checked' : ''">
     <h3>{{ task.title }}</h3>
     <p>{{ task.description }}</p>
+    <small>created at: {{ createdAt }}</small>
   </div>
   <div class="actions-container">
     <div (click)="onHandleEdit(task)">
