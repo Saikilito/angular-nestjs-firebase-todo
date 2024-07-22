@@ -5,7 +5,7 @@ import { Domain } from '@product-domain/task';
 import { envConfig } from '../../../config';
 
 type Task = Domain.Task;
-// TODO: unificar las respuestas con lo que devuelve el backend
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +15,9 @@ export class TaskService {
   constructor(private readonly httpService: HttpClient) {}
 
   getAllTask() {
-    return this.httpService.get<{ tasks: Task[] }>(this.uri);
+    return this.httpService.get<{ tasks: Task[] }>(
+      this.uri + '?sort=createdAt:desc'
+    );
   }
 
   createTask(task: Domain.TaskCreateInput) {

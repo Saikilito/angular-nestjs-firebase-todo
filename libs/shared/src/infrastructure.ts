@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { Literal } from './basic-types';
+import { BadRequestError } from './errors';
 
 export type WhereField = {
   field: string;
@@ -16,7 +17,24 @@ export type GetAllInput = {
 
 export const ValidateGetAllInputSchema = z
   .object({
-    sort: z.enum(['ASC', 'DESC']).nullable(),
+    sort: z
+      .string()
+      .transform((str) => {
+        const schema = z.enum(['asc', 'desc']);
+
+        const [field, sort] = str.split(':');
+
+        if (!field || !sort) {
+          throw BadRequestError.create(
+            'Sort should have the follow form field:sort'
+          );
+        }
+
+        schema.parse(sort);
+
+        return str;
+      })
+      .nullable(),
     where: z
       .object({
         fields: z.array(

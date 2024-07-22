@@ -29,8 +29,9 @@ export const makeFirestoreRepository = <T>({
         });
       }
 
-      if (input?.sort) {
-        query = query.orderBy(input.sort);
+      if (input?.sort && input.sort.includes(':')) {
+        const [field, sort] = input.sort.split(':') as [string, 'asc' | 'desc'];
+        query = query.orderBy(field, sort);
       }
 
       const snapshot = await query.get();

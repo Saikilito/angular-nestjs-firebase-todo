@@ -1,5 +1,5 @@
 ### Retrieve Tasks
-GET {{baseUrl}}/v1/tasks
+GET {{baseUrl}}/v1/tasks?sort=createdAt:asc
 Authorization: bearer {{apiKey}}
 
 ### Create Tasks
@@ -8,8 +8,8 @@ Content-Type: application/json
 Authorization: bearer {{apiKey}}
 
 {
-    "title":"New Task",
-    "description": "Close backend"
+    "title":"Task 3",
+    "description": "Test the sort tasks"
 }
 
 ### Update Task

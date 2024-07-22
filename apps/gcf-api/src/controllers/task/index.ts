@@ -4,7 +4,7 @@ import { tryCatchAndNext } from '../../utils';
 import { TaskUseCases } from '../../dependency-injection';
 
 export const getAll = tryCatchAndNext(async (req: Request, res: Response) => {
-  const input = req.body;
+  const input = req.query;
   const tasks = await TaskUseCases.getAll(input);
   res.json({ tasks });
 });

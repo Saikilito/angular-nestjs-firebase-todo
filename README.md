@@ -33,7 +33,7 @@ El proyecto consiste en una aplicación de tareas (ToDo) sencilla que permite a 
   como un inicio de sesión y la segunda página que será la principal, en
   la cual se mostrarán todas las tareas pendientes del usuario.
 
-- Las tareas deben estar ordenadas por fecha de creación
+- ✅ Las tareas deben estar ordenadas por fecha de creación
 
 - ✅ La página de inicio de sesión tiene un formulario donde solo se debe
   pedir el correo. Si el usuario existe, navega a la página principal, en
