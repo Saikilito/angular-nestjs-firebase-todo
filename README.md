@@ -20,7 +20,7 @@
   </p>
 </p>
     <p align="center">
-    <img src="./docs/auth-page.png"/>
+    <img src="./docs/todo-app.png"/>
     </p>
 
 # El proyecto
@@ -99,56 +99,44 @@ Ref:
 
 # Live Demo
 
-## Prerequisitos para correr en local
+## Prerrequisitos para correr en local
 
-- Ud. Debe poseer una cuenta activa en firebase
+- Debe poseer una cuenta y proyecto activo en Firebase.
 
 ## Iniciar la app en local
 
-Para iniciar esta app en local por favor siga cuidadosamente los siguiente pasos:
+Para iniciar esta app en local, por favor siga cuidadosamente los siguientes pasos:
 
-1. Ud. debe estar en la raiz del proyecto
-2. Ud. debe iniciar sesion en su cuenta de firebase `npx firebase login`
-3. Inicie la configuración de firebase `npx firebase init` desde la terminal
-4. Ud. debe habilitar la opcion de firebase
+0. Clone el repositorio: `git clone https://github.com/Saikilito/angular-nestjs-firebase-todo.git`
+1. Navegue a la raíz del proyecto: `cd angular-nestjs-firebase-todo`
+2. Inicie sesión en su cuenta de Firebase: `npx firebase login`
+3. Inicie la configuración de Firebase desde la terminal: `npx firebase init`
+4. Habilite la opción de Firebase para iniciar los emuladores, asegurándose de incluir al menos Firebase Functions y Firebase Firestore.
+5. Instale todas las dependencias del proyecto: `npm ci`
+6. Levante el backend con el comando: `npx nx serve gcf-api`
+7. Una vez iniciado correctamente el backend, la terminal le proporcionará la dirección URL donde corren los emuladores de Firebase. Esta tendrá una forma similar a `http://127.0.0.1:3001/<firebase-project-name>/us-central1/api`. Guarde esta dirección ya que será vital para correr el proyecto.
+8. Agregue variables de entorno:
+   - En `apps/gcf-api/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará.
+   - En `apps/web-app/src/config` encontrará un archivo `secrets.template` el cual debe renombrar como `secrets.ts` y reemplazar por contenido válido las variables de entorno que ahí encontrará. Tenga en cuenta que la URL del servidor puede cambiar dependiendo del nombre de su proyecto Firebase y la versión del emulador que esté utilizando. También asegúrese de agregar el sufijo `/v1` a la dirección del servidor, donde se encuentran trabajando todas las rutas del servidor.
+9. Levante el frontend con el comando: `npx nx serve web-app`
+10. Abra la app en [localhost:4200](http://localhost:4200) para ver la Angular ToDo App.
 
-2 - git clone
+### Descripción de las variables de entorno:
 
-```bash
-git clone https://github.com/Saikilito/smartcode-tickets.git
-cd smartcode-tickets
-```
-
-3- Dentro de la carpeta `server` escribe una archivo `.env` con la información necesaria para conectarse a la base de datos, usa el archivo `.env.example` para guiarte
-
-```bash
-cd smartcode-tickets/server
-```
-
-```bash
-USERNAME_DB =
-PASSWORD_DB =
-DB_NAME =
-JWT_SECRET =
-```
-
-PD: La variable JWT_SECRET recibe un `string` que desees colocar, este se usará como firma para garantizar los hash que protegen las rutas.
-
-4- instala y corre el servidor (DEV MODE)
+Se refiere al secreto para firmar los tokens JWT:
 
 ```bash
-yarn
-yarn dev
+ENV_JWT_SECRET =
 ```
 
-5- instalar y corre el cliente
+Se refiere a la dirección URL sobre la que corren los emuladores de Firebase. Esta la provee la terminal una vez que inicie el servidor:
 
 ```bash
-cd smartcode-tickets/client
-yarn && yarn start
+SERVER_URL =
 ```
 
-Abre el servidor en [http://localhost:3000/](http://localhost:3000/) Para ver el cliente.
-Usa [http://localhost:4000/](http://localhost:4000/) para interactuar con el server
+**Nota:** Después de configurar el proyecto por primera vez, puede correr el proyecto en una única terminal con el comando npx nx run-many --target=serve --all.
 
-PD: Usa email: "admin@smartcode.com" y password: "123456" para logearte como administrador
+**Nota:** Tenga en cuenta que la dirección del servidor debe incluir un prefijo `/v1`, quedando con una forma similar a `http://127.0.0.1:3001/<firebase-project-name>/us-central1/api/v1`
+
+**Nota:** En el backend, en `apps/gcf-api/request`, encontrará archivos `*.http` que documentan los endpoints disponibles en la aplicación. Si tiene instalada la extensión "REST Client" en VSCode, puede ejecutar directamente los endpoints sin necesidad de salir del editor.

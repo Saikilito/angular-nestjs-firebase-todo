@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Domain } from '@product-domain/task';
-import { envConfig } from '../../config';
+import { envConfig } from '../../../config';
 
 type Task = Domain.Task;
 // TODO: unificar las respuestas con lo que devuelve el backend

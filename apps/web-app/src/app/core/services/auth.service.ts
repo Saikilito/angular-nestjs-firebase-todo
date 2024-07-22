@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { CONSTANTS, Errors } from '@shared';
-import { envConfig } from '../../config';
+import { envConfig } from '../../../config';
 import { CONSTANTS as ANGULAR_CONSTANTS } from '../../shared/constants';
 
 type TokenResponse = {
