@@ -6,7 +6,7 @@
   </a>
 
   <h1 align="center">
-	Angular / Nestjs / Firebase 
+	Angular / Express / Firebase 
   </h1>
   <h1 align="center">ToDo App List</h1>
 
